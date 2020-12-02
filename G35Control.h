@@ -11,7 +11,9 @@ uint8_t LIGHT_COUNT =36;
 // Arduino pin number. Pin 13 will blink the on-board LED.
 uint8_t G35_PIN =23;
 
-G35String lights(23, 36);
+int LOOPSPEED = 25;
+
+G35String lights(G35_PIN, LIGHT_COUNT);
 
 
 int mode = 0;
@@ -89,7 +91,10 @@ class XmasLightsLight : public Component, public LightOutput {
   
   // use this loop to handle the modes for the light
   void loop() override{
-      if (loopcount>25){
+
+      // only process light updates each LOOPSPEED times through the loop.
+      
+      if (loopcount>LOOPSPEED){ 
         if(mode ==1){
             if (step==1){
    
@@ -161,7 +166,7 @@ class XmasLightsLight : public Component, public LightOutput {
       }else{
         loopcount++;
       }
-        delay(10);
+        delay(10); // delay for each time through the loop to slow down the light refresh speed.
     }
     protected: 
     
