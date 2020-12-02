@@ -1,0 +1,77 @@
+esphome:
+  name: g35_christmas_lights
+  platform: ESP32
+  board: esp-wrover-kit
+  includes:
+    - G35String.h
+    - G35Control.h
+wifi:
+  ssid: !secret WiFiAP
+  password: !secret WifiPWD
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "G35 Christmas Lights"
+    password: "3CuplFaZ1p8p"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+
+
+switch:
+  - platform: custom
+    lambda: |-
+      auto rga = new XMASLights_RedGreenAlternate();
+      App.register_component(rga);
+      return {rga};
+    switches:
+      name: "G35Christmas Lights Red/Green Alternate"
+  - platform: custom
+    lambda: |-
+      auto rgs = new XMASLights_RedGreenSwap();
+      App.register_component(rgs);
+      return {rgs};
+    switches:
+      name: "G35Christmas Lights Red/Green Swap"
+  - platform: custom
+    lambda: |-
+      auto rgc = new XMASLights_Chase();
+      App.register_component(rgc);
+      return {rgc};
+    switches:
+      name: "G35Christmas Lights Chase"
+  - platform: custom
+    lambda: |-
+      auto rgm = new XMASLights_MiddleIn();
+      App.register_component(rgm);
+      return {rgm};
+    switches:
+      name: "G35Christmas Lights Middle In"      
+
+light:
+  - platform: custom
+    lambda: |-
+      auto light_out = new XmasLightsLight();
+      App.register_component(light_out);
+      return {light_out};
+    id: my_light
+    lights:
+      - name: "Front Door XMAS Light"
+        default_transition_length: 0.1s
+        restore_mode: ALWAYS_OFF # because powercut could then cause all lights to turn on
+        effects:
+          - random:
+          - strobe:
+          - flicker:
+ 
+            
+
+
