@@ -8,8 +8,8 @@ PreReqs:
 Home Assistant
 ESPHome
 
-1: Create a new device in ESPHome.  Compile and upload to ESP with basic config. You'll need to do this to get ESPHome to create the folders for the source files.
-2: Set it up using the YAML (g35_christmas_lights.yaml)
+1: Create a new device in ESPHome (g35_Christmas_lights).  Compile and upload to ESP with basic config. You'll need to do this to get ESPHome to create the folders for the source files.
+2: Copy g35_christmas_lights.yaml into the ESP Device yaml that you created. Add in your WIFI AP and password. 
 3: Load the G35SString.h, G35string.cpp, G35Control.h, G35.h, G35.cpp files into the \config\esphome\g35_christmas_lights\src directory in Home Assistant.
 4: Upload to your ESP32.
 
